@@ -1,0 +1,85 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 90%;
+    margin: 0px auto;
+}
+
+body {
+    background-color: #daa520;
+    padding: 3rem;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.main-content {
+    background-color: aliceblue;
+    /*#F8F8FF*/
+    height: 86vh;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    /* margin-top: 2rem; */
+    padding: 3rem;
+}
+
+.right-nav {
+    display: flex;
+}
+
+.right-nav a {
+    color: black;
+    transition: 0.2s;
+    text-decoration: none;
+    margin-left: 3rem;
+    font-size: 1.0rem;
+}
+
+.left-nav .logo {
+    font-size: 1.0rem;
+}
+
+
+/* Showcase */
+
+.showcase-intro-container {
+    display: flex;
+    padding-top: 4rem;
+    justify-content: space-between;
+}
+
+.showcase-description .header {
+    font-size: 2.5rem;
+    font-weight: bolder;
+    line-height: 4rem;
+    text-align: center;
+    padding-bottom: 0.8rem;
+
+}
+
+.showcase-description .description {
+    font-size: 1.0rem;
+    text-align: center;
+    padding-bottom: 2rem;
+
+}
+
+.btn-primary {
+    padding: 0.7rem 2.0rem;
+    border-radius: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #daa520;
+    border: none;
+    cursor: pointer;
+    align-items: center;
+    transition: all .2s;
+
+}
