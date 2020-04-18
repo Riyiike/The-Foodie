@@ -6,7 +6,7 @@
 
 .container {
     width: 90%;
-    margin: 0px auto;
+    margin: 0 auto;
 }
 
 body {
@@ -73,7 +73,9 @@ body {
 .btn-primary {
     padding: 0.7rem 2.0rem;
     border-radius: 100px;
+    text-decoration: none;
     display: block;
+    color: black;
     margin-left: auto;
     margin-right: auto;
     background-color: #daa520;
@@ -82,4 +84,8 @@ body {
     align-items: center;
     transition: all .2s;
 
+}
+
+a:hover {
+    color: #c79310
 }
