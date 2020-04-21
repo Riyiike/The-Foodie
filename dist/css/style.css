@@ -16,10 +16,7 @@ body {
 }
 
 .main-content {
-    background-color:
-        aliceblue;
-
-    /*#F8F8FF*/
+    background-color: #F8F8F8;
     height: 86vh;
 }
 
@@ -254,8 +251,8 @@ a:hover {
 }
 
 .copyright {
-    color: #968B87;
-    font-size: 1.2rem;
+    color: #0000;
+    font-size: 1.0rem;
     margin-top: auto;
 }
 
@@ -291,7 +288,7 @@ a:hover {
 .header2 {
     grid-area: head;
     background-color:
-        #F9F5F3;
+        #f8f8f8;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -487,7 +484,7 @@ a:hover {
 }
 
 .recipe {
-    background-color: #F9F5F3;
+    background-color: #f8f8f8;
     border-top: 1px solid #fff;
 }
 

@@ -1,0 +1,40 @@
+{
+  "name": "the-foodie-recipe-app",
+  "version": "1.0.0",
+  "description": "the-foodie-recipe-app project",
+  "main": "index.js",
+  "dependencies": {
+    "live-server": "^1.2.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.8.7",
+    "@babel/polyfill": "^7.8.7",
+    "@babel/preset-env": "^7.9.5",
+    "babel-loader": "^8.1.0",
+    "babel-preset-react": "^6.24.1",
+    "html-webpack-plugin": "^4.2.0",
+    "jshint": "^2.11.0",
+    "jshint-loader": "^0.8.4",
+    "node-libs-browser": "^2.2.1",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  },
+  "scripts": {
+    "dev": "webpack --mode development",
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Riyiike/The-Foodie-Recipe-App.git"
+  },
+  "author": "Riyike Odusanya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Riyiike/The-Foodie-Recipe-App/issues"
+  },
+  "homepage": "https://github.com/Riyiike/The-Foodie-Recipe-App#readme"
+}
