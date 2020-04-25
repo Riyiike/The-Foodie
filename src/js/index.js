@@ -1,5 +1,5 @@
 //first method of the API call before exporting to search.js as a method
-/*import axios from 'axios';
+import axios from 'axios';
 
 async function getResults(query) {
     const proxy = 'https://cors-anywhere.herokuapp.com/';
@@ -13,12 +13,12 @@ async function getResults(query) {
         alert(error);
     }
 }
-getResults('burger');*/
+getResults('burger');
 
-import Search from './models/Search';
+/*import Search from './models/Search';
 
 const search = new Search('burger');
 
 console.log(search);
 
-search.getResults();
+search.getResults();*/
