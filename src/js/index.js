@@ -40,7 +40,7 @@ const controlSearch = async () => {
         await state.search.getResults(); //get results runs and we wait for it to finish before logging to console
 
         //5) Render results on the UI
-        console.log(state.search.result); //where the data will be saved
+        console.log(state.search.result) //where the data will be saved
     }
 }
 
