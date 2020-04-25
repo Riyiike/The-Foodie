@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "../../../../url-shortner2"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "My-Wallet.NG"
+	}
+}
