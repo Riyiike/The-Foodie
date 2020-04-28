@@ -10,7 +10,7 @@ export default class Search {
         try {
             const res = await axios(`${proxy}https://api.spoonacular.com/recipes/search?query=${this.query}&apiKey=${key}`);
             this.result = res.data.results;
-            //console.log(this.result);
+            // data.results is my data results./console.log(this.result)to see;
         } catch (error) {
             alert(error);
         }

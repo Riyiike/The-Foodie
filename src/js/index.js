@@ -16,6 +16,10 @@ async function getResults(query) {
 getResults('burger');*/
 
 import Search from './models/Search';
+import {
+    elements
+} from './views/base';
+import * as searchView from './views/searchView';
 
 /* Global state of the app
 -Search object
@@ -27,24 +31,29 @@ import Search from './models/Search';
 const state = {};
 
 const controlSearch = async () => {
-    //Get query from view
-    const query = 'burger' // TOOO
+    //1 Get query from view
+    const query = searchView.getInput();
+    console.log(query);
+
+
+
+
 
     if (query) {
         //2) New search object and add to state 
-        state.search = new Search(query);
+        state.search = new Search(query); //will be stored in the state
 
         //3) Prepare UI for results
 
         ///4 Search for recipes
-        await state.search.getResults(); //get results runs and we wait for it to finish before logging to console
+        await state.search.getResults(); //get results runs and we wait for it to finish before logging to console we used an async method above too
 
         //5) Render results on the UI
-        console.log(state.search.result) //where the data will be saved
+        console.log(state.search.result) //show result and it will be stored where the data will be saved
     }
 }
 
-document.querySelector('.search').addEventListener('submit', e => {
+elements.searchForm.addEventListener('submit', e => {
     e.preventDefault();
     controlSearch();
 
