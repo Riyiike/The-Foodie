@@ -32,24 +32,19 @@ const state = {};
 
 const controlSearch = async () => {
     //1 Get query from view
-    const query = searchView.getInput();
-    console.log(query);
-
-
-
-
-
+    const query = searchView.getInput(); // get input from the input field
     if (query) {
         //2) New search object and add to state 
-        state.search = new Search(query); //will be stored in the state
+        state.search = new Search(query); //will be stored in the state as a new search
 
         //3) Prepare UI for results
-
+        searchView.clearInput();
+        searchView.clearResults();
         ///4 Search for recipes
         await state.search.getResults(); //get results runs and we wait for it to finish before logging to console we used an async method above too
 
         //5) Render results on the UI
-        console.log(state.search.result) //show result and it will be stored where the data will be saved
+        searchView.renderResults(state.search.result); //show result and it will be stored where the data will be saved and displayed using the dom
     }
 }
 
