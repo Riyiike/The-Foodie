@@ -1,5 +1,5 @@
 //first method of the API call before exporting to search.js as a method
-import axios from 'axios';
+/*import axios from 'axios';
 
 async function getResults(query) {
     const proxy = 'https://cors-anywhere.herokuapp.com/';
@@ -13,12 +13,47 @@ async function getResults(query) {
         alert(error);
     }
 }
-getResults('burger');
+getResults('burger');*/
 
-/*import Search from './models/Search';
+import Search from './models/Search';
+import {
+    elements
+} from './views/base';
+import * as searchView from './views/searchView';
 
-const search = new Search('burger');
+/* Global state of the app
+-Search object
+-current recipe object
+-shopping list object
+-liked recipes
+*/
 
-console.log(search);
+const state = {};
 
-search.getResults();*/
+const controlSearch = async () => {
+    //1 Get query from view
+    const query = searchView.getInput(); // get input from the input field
+    if (query) {
+        //2) New search object and add to state 
+        state.search = new Search(query); //will be stored in the state as a new search
+
+        //3) Prepare UI for results
+        searchView.clearInput();
+        searchView.clearResults();
+        ///4 Search for recipes
+        await state.search.getResults(); //get results runs and we wait for it to finish before logging to console we used an async method above too
+
+        //5) Render results on the UI
+        searchView.renderResults(state.search.result); //show result and it will be stored where the data will be saved and displayed using the dom
+    }
+}
+
+elements.searchForm.addEventListener('submit', e => {
+    e.preventDefault();
+    controlSearch();
+
+});
+
+//const search = new Search('burger');
+
+//console.log(search);
