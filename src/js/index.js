@@ -59,6 +59,16 @@ elements.searchForm.addEventListener('submit', e => {
 
 });
 
+elements.searchResPages.addEventListener('click', e => {
+    const btn = e.target.closest('.btn-inline');
+    if (btn) {
+        const goToPage = parseInt(btn.dataset.goto, 10);
+        searchView.clearResults();
+        searchView.renderResults(state.search.result, goToPage);
+        //console.log(goToPage);
+    }
+});
+
 //const search = new Search('burger');
 
 //console.log(search);
