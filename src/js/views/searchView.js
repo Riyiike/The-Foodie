@@ -11,6 +11,31 @@ export const clearResults = () => {
     elements.searchResList.innerHTML = '';
 };
 
+//limiting the title of the recipe
+
+/*PASTA WITH TOMATO SPINACH
+acc:0 /acc + cur.length = 5/ newTitle =[Pasta]
+acc:5 /acc + cur.length = 9/ newTitle =[Pasta, with]
+acc:9 /acc + cur.length = 15/ newTitle =[Pasta, with,tomato]
+acc:15 /acc + cur.length = 18/ newTitle =[Pasta with, tomato]
+
+*/
+const limitTitle = (label, limit = 17) => {
+    const newTitle = [];
+    if (label.length > limit) {
+        label.split('').reduce((acc, cur) => {
+            if (acc + cur.length <= limit) {
+                newTitle.push(cur);
+            }
+            return acc + cur.length;
+        }, 0);
+
+        //return the result
+        return `${newTitle.join(' ')}...`;
+    }
+    return label;
+};
+
 //const renderRecipe = result => {
 const renderRecipe = hit => {
     const markup = `
@@ -22,40 +47,51 @@ const renderRecipe = hit => {
             </figure>
             <div class="results__data">
                
-                <h4 class="results__name">${hit.recipe.label}</h4>
+                <h4 class="results__name">${limitTitle(hit.recipe.label)}</h4>
                
                 <p class="likes__author">${hit.recipe.source}</p>
             </div>
         </a>
      </li>
     `;
-    elements.searchResList.insertAdjacentHTML('beforeend', markup)
+    elements.searchResList.insertAdjacentHTML('beforeend', markup);
 
+};
 
-    /* const markup = `
-        <li>
-            <a class="results__link results__link--active" href="#${result.id}">
-                <figure class="results__fig">
-                
-                <img src="http://spoonacular.com/recipeImages/${result.id}-240x150.jpg" alt="Test">
-                </figure>
-                <div class="results__data">
-                
-                    <h4 class="results__name">${result.title}</h4>
-                
-                    <p class="likes__author">Today's meal</p>
-                </div>
-            </a>
-    </li>
-    `;*/
+//type of button 'prev' or 'next'
+const createButton = (page, type) => `
+    <button class="btn-inline results__btn--${type}" data-goto = ${type ==='prev' ? page - 1 : page + 1 }>
+        <svg class="search__icon">
+            <use href="img/icons.svg#icon-triangle-$ (type === 'prev' ? 'left' : 'right' }"></use>
+        </svg>
+        <span>Page ${type ==='prev' ? page - 1 : page + 1 }</span>
+    </button>
 
+`;
 
-}
+//loop through all the hits (renderResults)then (add a function for) each individual recipe (renderRecipe)
 
-//loop through all the recipes (renderResults)then (add a function for) each individual recipe (renderRecipe)
+const renderButtons = (page, numResults, resPerPage) => {
+    const pages = Math.ceil(numResults / resPerPage);
+
+    if (page === 1 && pages > 1) {
+        //only button to go to next page
+        button = createButton(page, 'next');
+    } else if (page < pages) {
+        button = createButton(page, 'next');
+    } else if (page === pages && pages > 1) {
+        //only button to go to prev page
+    }
+    //then export to an outside function 
+
+};
 
 //export const renderResults = results => {
-export const renderResults = hits => {
+export const renderResults = (hits, page = 3, resPerPage = 10) => {
     //results.forEach(renderRecipe)
-    hits.forEach(renderRecipe)
+    const start = (page - 1) * resPerPage;
+    const end = page * resPerPage;
+
+    hits.slice(start, end).forEach(renderRecipe);
+
 };

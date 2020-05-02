@@ -17,7 +17,9 @@ getResults('burger');*/
 
 import Search from './models/Search';
 import {
-    elements
+    elements,
+    renderLoader,
+    clearLoader
 } from './views/base';
 import * as searchView from './views/searchView';
 
@@ -40,10 +42,13 @@ const controlSearch = async () => {
         //3) Prepare UI for results
         searchView.clearInput();
         searchView.clearResults();
+        renderLoader(elements.searchRes);
+
         ///4 Search for recipes
         await state.search.getResults(); //get results runs and we wait for it to finish before logging to console we used an async method above too
 
         //5) Render results on the UI
+        clearLoader();
         searchView.renderResults(state.search.result); //show result and it will be stored where the data will be saved and displayed using the dom
     }
 }
