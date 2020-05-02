@@ -376,7 +376,10 @@ a:hover {
     transition: all .5s .2s;
 }
 
-.results,
+.results {
+    padding: 0rem 0;
+}
+
 .likes {
     padding: 3rem 0;
 }
@@ -444,7 +447,7 @@ a:hover {
 
 .results__name,
 .likes__name {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: #F59A83;
     text-transform: uppercase;
     font-weight: 600;
