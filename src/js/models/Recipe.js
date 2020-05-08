@@ -1,15 +1,18 @@
 import axios from 'axios';
+import {
+    key,
+    proxy
+} from '../config';
 
 export default class Recipe {
-    cpnstructor(id) {
+    constructor(id) {
         this.id = iid;
     }
     async getRecipe() {
-        const proxy = 'https://cors-anywhere.herokuapp.com/';
-        const key = 'e73763935af70ea5fcfaa91c7675d76b';
-        const app_id = '67259000';
         try {
-            const res = await axios(`$`)
+            const res = await axios(`${proxy}https://api.edamam.com/search?q=${this.query}&app_id=${app_id}&app_key=${key}`);
+        } catch (error) {
+            console.log(error);
         }
     }
 }
