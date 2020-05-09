@@ -1,20 +1,3 @@
-//first method of the API call before exporting to search.js as a method
-/*import axios from 'axios';
-
-async function getResults(query) {
-    const proxy = 'https://cors-anywhere.herokuapp.com/';
-    const key = '877c0683ee3d476fa05e6c3a2a8e5c5e';
-    try {
-        // const res = await axios(`${proxy}https://api.spoonacular.com/recipes/search?query=cheese&apiKey=${key}`);
-        const res = await axios(`${proxy}https://api.spoonacular.com/recipes/search?query=${query}&apiKey=${key}`);
-        const recipes = res.data.results;
-        console.log(recipes);
-    } catch (error) {
-        alert(error);
-    }
-}
-getResults('burger');*/
-
 import Search from './models/Search';
 import {
     elements,
@@ -22,6 +5,7 @@ import {
     clearLoader
 } from './views/base';
 import * as searchView from './views/searchView';
+import Recipe from './models/Recipe';
 
 /* Global state of the app
 -Search object
@@ -31,6 +15,10 @@ import * as searchView from './views/searchView';
 */
 
 const state = {};
+
+/**
+ * SEARCH CONTROLLER
+ */
 
 const controlSearch = async () => {
     //1 Get query from view
@@ -72,3 +60,8 @@ elements.searchResPages.addEventListener('click', e => {
 //const search = new Search('burger');
 
 //console.log(search);
+/***
+ * RECIPE CONTROLLER
+ */
+const r = new Recipe("http%3A%2F%2Fwww.edamam.com%2Fontologies% 2Fedamam.owl%23recipe_b79327d05b8e5b838ad6cfd9576b30b6");
+r.getRecipe();
