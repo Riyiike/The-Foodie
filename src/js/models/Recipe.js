@@ -1,8 +1,7 @@
 import axios from 'axios';
 import {
     key,
-    proxy,
-    app_id
+    proxy
 } from '../config';
 
 export default class Recipe {
@@ -12,12 +11,28 @@ export default class Recipe {
 
     async getRecipe() {
         try {
-            const res = await axios(`${proxy}https://api.edamam.com/search?r=${this.id}&app_id=${app_id}&app_key=${key}`);
-            //this.title = res.data.
+            const res = await axios(`${proxy}https://api.spoonacular.com/recipes/${this.id}/information?includeNutrition=false&apiKey=${key}`);
+            this.title = res.data.title;
+            this.author = res.data.sourceName;
+            this.url = res.data.sourceUrl;
+            this.ingredients = res.data.ingredients;
+            this.img = res.data.image;
             console.log(res);
-            //https://api.edamam.com/search?r=http%3A%2F%2Fwww.edamam.com%2Fontologies%2Fedamam.owl%23recipe_b79327d05b8e5b838ad6cfd9576b30b6&app_id=67259000&app_key=e73763935af70ea5fcfaa91c7675d76b
         } catch (error) {
             console.log(error);
+            alert('Something went wrong :(');
         }
     }
+
+    calcTime() {
+        //Assuming that we need 15 min for each 3 ingredients
+        const numIng = this.ingredients.length;
+        const periods = Math.ceil(numIng / 3);
+        this.time = periods * 15;
+    }
+
+    calcServings() {
+        this.servings = 4;
+    }
+
 }

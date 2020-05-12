@@ -21,10 +21,10 @@ acc:9 /acc + cur.length = 15/ newTitle =[Pasta, with,tomato]
 acc:15 /acc + cur.length = 18/ newTitle =[Pasta with, tomato]
 
 */
-const limitTitle = (label, limit = 17) => {
+const limitTitle = (title, limit = 17) => {
     const newTitle = [];
-    if (label.length > limit) {
-        label.split('').reduce((acc, cur) => {
+    if (title.length > limit) {
+        title.split('').reduce((acc, cur) => {
             if (acc + cur.length <= limit) {
                 newTitle.push(cur);
             }
@@ -34,23 +34,23 @@ const limitTitle = (label, limit = 17) => {
         //return the result
         return `${newTitle.join(' ')}...`;
     }
-    return label;
+    return title;
 };
 
-//const renderRecipe = result => {
-const renderRecipe = hit => {
+//const renderRecipe = hit => {
+const renderRecipe = result => {
     const markup = `
        <li>
-        <a class="results__link results__link--active" href="#${hit.recipe.uri}">
+        <a class="results__link results__link--active" href="#${result.id}">
             <figure class="results__fig">
                
-                <img src="${hit.recipe.image}" alt="Test">
+                <img src="http://spoonacular.com/recipeImages/${result.id}-240x150.jpg" alt="Test">
             </figure>
             <div class="results__data">
                
-                <h4 class="results__name">${limitTitle(hit.recipe.label)}</h4>
+                <h4 class="results__name">${limitTitle(result.title)}</h4>
                
-                <p class="likes__author">${hit.recipe.source}</p>
+                <p class="likes__author">${result.title}</p>
             </div>
         </a>
      </li>
@@ -89,13 +89,13 @@ const renderButtons = (page, numResults, resPerPage) => {
 };
 
 //export const renderResults = results => {
-export const renderResults = (hits, page = 1, resPerPage = 10) => {
+export const renderResults = (results, page = 1, resPerPage = 10) => {
     //results.forEach(renderRecipe)
     //render results of current page
     const start = (page - 1) * resPerPage;
     const end = page * resPerPage;
-    hits.slice(start, end).forEach(renderRecipe);
+    results.slice(start, end).forEach(renderRecipe);
     //render pagination buttons
-    renderButtons(page, hits.length, resPerPage);
+    renderButtons(page, results.length, resPerPage);
 
 };

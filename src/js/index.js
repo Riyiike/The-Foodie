@@ -31,13 +31,18 @@ const controlSearch = async () => {
         searchView.clearInput();
         searchView.clearResults();
         renderLoader(elements.searchRes);
+        try{
+             ///4 Search for recipes
+            await state.search.getResults(); //get results runs and we wait for it to finish before logging to console we used an async method above too
 
-        ///4 Search for recipes
-        await state.search.getResults(); //get results runs and we wait for it to finish before logging to console we used an async method above too
-
-        //5) Render results on the UI
-        clearLoader();
-        searchView.renderResults(state.search.result); //show result and it will be stored where the data will be saved and displayed using the dom
+            //5) Render results on the UI
+            clearLoader();
+            searchView.renderResults(state.search.result); //show result and it will be stored where the data will be saved and displayed using the dom
+        } catch (error){
+            alert ('Something went wrong with the search...');
+            clearLoader();
+        }
+       
     }
 }
 
@@ -63,5 +68,40 @@ elements.searchResPages.addEventListener('click', e => {
 /***
  * RECIPE CONTROLLER
  */
-const r = new Recipe("http%3A%2F%2Fwww.edamam.com%2Fontologies% 2Fedamam.owl%23recipe_b79327d05b8e5b838ad6cfd9576b30b6");
-r.getRecipe();
+//Testing
+/*const r = new Recipe(492564);
+r.getRecipe();*/
+const controlRecipe = () => {
+    //Get ID from url
+    const id = window.location.hash.replace('#','');
+    console.log(id);
+
+    if (id){
+        //Prepare UI for changes
+
+
+        //Create new recipe object
+        state.recipe = new Recipe(id);
+        try {
+            //Get recipe data
+            await state.recipe .getRecipe();
+
+            //Calculate servings and time 
+            state.recipe.calcTime();
+            state.recipe.calcServings();
+
+            //Render recipe
+            console.log(state.recipe);
+
+        } catch(error){
+            alert('Error processing recipe');
+        }
+           
+    }   
+
+};
+
+//window.addEventListener('hashchange', controlRecipe);
+//window.addEventListener('load',controlRecipe);
+//using the same event listener for different actions
+['hashchange', 'load'].forEach(event=> window.addEventListener(event, controlRecipe));
