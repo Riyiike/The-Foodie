@@ -1,15 +1,38 @@
 import axios from 'axios';
+import {
+    key,
+    proxy
+} from '../config';
 
 export default class Recipe {
-    cpnstructor(id) {
-        this.id = iid;
+    constructor(id) {
+        this.id = id;
     }
+
     async getRecipe() {
-        const proxy = 'https://cors-anywhere.herokuapp.com/';
-        const key = 'e73763935af70ea5fcfaa91c7675d76b';
-        const app_id = '67259000';
         try {
-            const res = await axios(`$`)
+            const res = await axios(`${proxy}https://api.spoonacular.com/recipes/${this.id}/information?includeNutrition=false&apiKey=${key}`);
+            this.title = res.data.title;
+            this.author = res.data.sourceName;
+            this.url = res.data.sourceUrl;
+            this.ingredients = res.data.ingredients;
+            this.img = res.data.image;
+            console.log(res);
+        } catch (error) {
+            console.log(error);
+            alert('Something went wrong :(');
         }
     }
+
+    calcTime() {
+        //Assuming that we need 15 min for each 3 ingredients
+        const numIng = this.ingredients.length;
+        const periods = Math.ceil(numIng / 3);
+        this.time = periods * 15;
+    }
+
+    calcServings() {
+        this.servings = 4;
+    }
+
 }

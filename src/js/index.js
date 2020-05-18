@@ -1,20 +1,3 @@
-//first method of the API call before exporting to search.js as a method
-/*import axios from 'axios';
-
-async function getResults(query) {
-    const proxy = 'https://cors-anywhere.herokuapp.com/';
-    const key = '877c0683ee3d476fa05e6c3a2a8e5c5e';
-    try {
-        // const res = await axios(`${proxy}https://api.spoonacular.com/recipes/search?query=cheese&apiKey=${key}`);
-        const res = await axios(`${proxy}https://api.spoonacular.com/recipes/search?query=${query}&apiKey=${key}`);
-        const recipes = res.data.results;
-        console.log(recipes);
-    } catch (error) {
-        alert(error);
-    }
-}
-getResults('burger');*/
-
 import Search from './models/Search';
 import {
     elements,
@@ -22,6 +5,7 @@ import {
     clearLoader
 } from './views/base';
 import * as searchView from './views/searchView';
+import Recipe from './models/Recipe';
 
 /* Global state of the app
 -Search object
@@ -31,6 +15,10 @@ import * as searchView from './views/searchView';
 */
 
 const state = {};
+
+/**
+ * SEARCH CONTROLLER
+ */
 
 const controlSearch = async () => {
     //1 Get query from view
@@ -43,13 +31,18 @@ const controlSearch = async () => {
         searchView.clearInput();
         searchView.clearResults();
         renderLoader(elements.searchRes);
+        try{
+             ///4 Search for recipes
+            await state.search.getResults(); //get results runs and we wait for it to finish before logging to console we used an async method above too
 
-        ///4 Search for recipes
-        await state.search.getResults(); //get results runs and we wait for it to finish before logging to console we used an async method above too
-
-        //5) Render results on the UI
-        clearLoader();
-        searchView.renderResults(state.search.result); //show result and it will be stored where the data will be saved and displayed using the dom
+            //5) Render results on the UI
+            clearLoader();
+            searchView.renderResults(state.search.result); //show result and it will be stored where the data will be saved and displayed using the dom
+        } catch (error){
+            alert ('Something went wrong with the search...');
+            clearLoader();
+        }
+       
     }
 }
 
@@ -72,3 +65,43 @@ elements.searchResPages.addEventListener('click', e => {
 //const search = new Search('burger');
 
 //console.log(search);
+/***
+ * RECIPE CONTROLLER
+ */
+//Testing
+/*const r = new Recipe(492564);
+r.getRecipe();*/
+const controlRecipe = () => {
+    //Get ID from url
+    const id = window.location.hash.replace('#','');
+    console.log(id);
+
+    if (id){
+        //Prepare UI for changes
+
+
+        //Create new recipe object
+        state.recipe = new Recipe(id);
+        try {
+            //Get recipe data
+            await state.recipe .getRecipe();
+
+            //Calculate servings and time 
+            state.recipe.calcTime();
+            state.recipe.calcServings();
+
+            //Render recipe
+            console.log(state.recipe);
+
+        } catch(error){
+            alert('Error processing recipe');
+        }
+           
+    }   
+
+};
+
+//window.addEventListener('hashchange', controlRecipe);
+//window.addEventListener('load',controlRecipe);
+//using the same event listener for different actions
+['hashchange', 'load'].forEach(event=> window.addEventListener(event, controlRecipe));
