@@ -4,7 +4,7 @@
   "description": "the-foodie-recipe-app project",
   "main": "index.js",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "live-server": "^1.2.1"
   },
   "devDependencies": {
